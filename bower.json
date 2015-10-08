@@ -1,6 +1,6 @@
 {
     "name": "px-simple-chart-common-behavior",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "main": [
         "px-simple-chart-common-behavior.html"
     ],
