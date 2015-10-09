@@ -25,6 +25,7 @@ var pxSimpleChartCommonBehavior = {
     defaultHeight: '150',
 
     properties: {
+
         /**
         * width
         *
@@ -35,6 +36,7 @@ var pxSimpleChartCommonBehavior = {
             observer: '_drawChart',
             value: this.defaultWidth
         },
+
         /**
         * height
         *
@@ -45,11 +47,12 @@ var pxSimpleChartCommonBehavior = {
             observer: '_drawChart',
             value: this.defaultHeight
         }
+
     },
 
     // Fired on attached event
     attached: function() {
-        this.svg = this.svg || d3.select(this.$$("svg"));
+        this.svg = d3.select(this.$$("svg"));
         this._drawChart();
     },
 
@@ -57,11 +60,13 @@ var pxSimpleChartCommonBehavior = {
      * _drawChart() removes previous chart and debounces multiple calls
     */
     _drawChart: function() {
-        this._removeChart();
-        // multiple calls to _drawChart need to be debounced
-        this.debounce('_drawChartDebounced', function() {
-            this._drawChartDebounced();
-        }, 310);
+        if(this.svg) {
+            this._removeChart();
+            // multiple calls to _drawChart need to be debounced
+            this.debounce('_drawChartDebounced', function() {
+                this._drawChartDebounced();
+            }, 310);
+        }
     },
 
     /**
@@ -75,13 +80,13 @@ var pxSimpleChartCommonBehavior = {
     },
 
     /**
-     * _removeChartDebounced() adds the style-scope class of the component to all SVG
-     * child nodes. This is necessary because Polymer, while applying the class
-     * to child HTML elements, does not apply the class to child SVG elements
-     *
+     * _removeChartDebounced() resizes the SVG element and clears any internal
+     * contents. This is necessary between redrawing the chart.
+     * Depends on this.svg being a D3 selection of the chart's SVG element
     */
     _removeChartDebounced: function() {
-        this.svg.attr("width", 1)
+        this.svg
+            .attr("width", 1)
             .attr("height", 1)
             .text("");
     },
@@ -200,6 +205,17 @@ var pxSimpleChartCommonBehavior = {
         };
     },
 
+    /**
+     * _ensureMinimum() ensures that a Number is equal to or greater than a min
+     *
+     * @param {Number} value
+     * @param {Number} min
+     * @return {Number} value
+    */
+    _ensureMinimum: function(value, min) {
+        return value = value >= min ? value : min;
+    },
+
     _reconcileWidth: function(value) {
         return this._reconcileDimensionValue(value, this.defaultWidth, 'width');
     },
@@ -230,6 +246,17 @@ var pxSimpleChartCommonBehavior = {
             right: style.getPropertyValue('padding-right').split('px')[0],
             bottom: style.getPropertyValue('padding-bottom').split('px')[0],
             left: style.getPropertyValue('padding-left').split('px')[0]
+        };
+    },
+
+    _setDimensions: function() {
+        this.widthValue = this._reconcileWidth(this.width);
+        this.heightValue = this._reconcileHeight(this.height);
+        if(this.height === 'auto' || this.width === 'auto') {
+            var that = this;
+            window.onresize = function() {
+                that._drawChart();
+            };
         };
     }
 
