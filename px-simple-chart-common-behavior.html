@@ -226,7 +226,7 @@ var pxSimpleChartCommonBehavior = {
 
     _reconcileDimensionValue: function(value, defaultValue, type) {
         var value = this._reconcileValue(value, defaultValue);
-        return value === 'auto' ? this._getAutoValue(type) : value;
+        return value === 'auto' ? this._getAutoValue(type) : parseInt(value);
     },
 
     _getAutoValue: function(type) {
