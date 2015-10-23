@@ -150,25 +150,23 @@ var pxSimpleChartCommonBehavior = {
         };
     },
 
-    /**
-     * _calculateTextWidth() returns the width in pixels for a given string of
-     * text when rendered in SVG using the given className
-     *
-     * @param {String} text
-     * @param {String} className
-     * @return {Number} width
-    */
-    _calculateTextWidth: function(text, className) {
+    _calculateTextSize: function(text, className) {
         var textNode = this.svg
             .append("text")
             .attr("class", className)
             .attr("x", 0)
             .attr("y", 0)
             .text(text);
-        var width = textNode.node().getComputedTextLength();
+        var size = textNode.node().getBoundingClientRect();
         textNode.remove();
-         // correct for getComputedTextLength accuracy
-        return Math.round(width - (width * 0.21));
+        return size;
+    },
+
+    _calculateTextHeight: function(text, className) {
+        return Math.round(this._calculateTextSize(text, className).height);
+    },
+    _calculateTextWidth: function(text, className) {
+        return Math.round(this._calculateTextSize(text, className).width);
     },
 
     /**
@@ -252,6 +250,7 @@ var pxSimpleChartCommonBehavior = {
     _setDimensions: function() {
         this.widthValue = this._reconcileWidth(this.width);
         this.heightValue = this._reconcileHeight(this.height);
+        // set a window.onresize event listener for responsive redraw of chart
         if(this.height === 'auto' || this.width === 'auto') {
             var that = this;
             window.onresize = function() {
