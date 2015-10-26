@@ -192,12 +192,12 @@ var pxSimpleChartCommonBehavior = {
                 return 'auto';
                 break;
             default:
-                if(px.isFloat(value)) {
+                if(px.isFloat(Number(value))) {
                     return parseFloat(value);
-                } else if(px.isInt(value)) {
+                } else if(px.isInt(Number(value))) {
                     return parseInt(value);
                 } else {
-                    return value;
+                    return defaultValue;
                 };
                 break;
         };
