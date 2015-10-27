@@ -23,6 +23,8 @@ var pxSimpleChartCommonBehavior = {
 
     defaultWidth: '283',
     defaultHeight: '150',
+    minimumWidth: '100',
+    minimumHeight: '50',
 
     properties: {
 
@@ -215,11 +217,39 @@ var pxSimpleChartCommonBehavior = {
     },
 
     _reconcileWidth: function(value) {
-        return this._reconcileDimensionValue(value, this.defaultWidth, 'width');
+        var width = this._reconcileDimensionValue(value, this.defaultWidth, 'width');
+        if(width < this.minimumWidth) {
+            width = this.defaultWidth;
+            console.error(
+                'The width of the chart with id of "'
+                + this.id
+                + '" is too low. The minimum is '
+                + this.minimumWidth
+                + ' pixels, however the chart is set to '
+                + width
+                + '. The default value of '
+                + this.defaultWidth
+                + ' has been assigned to the chart.');
+        };
+        return width;
     },
 
     _reconcileHeight: function(value) {
-        return this._reconcileDimensionValue(value, this.defaultHeight, 'height');
+        var height = this._reconcileDimensionValue(value, this.defaultHeight, 'height');
+        if(height < this.minimumHeight) {
+            height = this.defaultHeight;
+            console.error(
+                'The height of the chart with id of "'
+                + this.id
+                + '" is too low. The minimum is '
+                + this.minimumHeight
+                + ' pixels, however the chart is set to '
+                + height
+                + '. The default value of '
+                + this.defaultHeight
+                + ' has been assigned to the chart.');
+        };
+        return height;
     },
 
     _reconcileDimensionValue: function(value, defaultValue, type) {
