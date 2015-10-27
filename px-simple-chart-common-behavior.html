@@ -21,6 +21,15 @@
 
 var pxSimpleChartCommonBehavior = {
 
+    /**
+    * Private Properties
+    *
+    * `defaultWidth` - sets the default width of the component in pixels.
+    * `defaultHeight` - sets the default height of the component in pixels.
+    * `minimumWidth` - sets the minimum width of the component in pixels.
+    * `minimumHeight` - sets the minimum height of the component in pixels.
+    *
+    */
     defaultWidth: '283',
     defaultHeight: '150',
     minimumWidth: '100',
@@ -52,14 +61,17 @@ var pxSimpleChartCommonBehavior = {
 
     },
 
-    // Fired on attached event
+    /**
+     * attached() Polymer fires this event automatically, we use it to define
+     * this.svg and initiate the component
+    */
     attached: function() {
         this.svg = d3.select(this.$$("svg"));
         this._drawChart();
     },
 
     /**
-     * _drawChart() removes previous chart and debounces multiple calls
+     * _drawChart() removes previous chart, draws new chart. Debounced.
     */
     _drawChart: function() {
         if(this.svg) {
@@ -72,7 +84,7 @@ var pxSimpleChartCommonBehavior = {
     },
 
     /**
-     * _removeChart() removes previous chart and debounces multiple calls
+     * _removeChart() removes previous chart contents. Debounced.
     */
     _removeChart: function() {
         this.debounce('_removeChartDebounced', function() {
@@ -152,6 +164,23 @@ var pxSimpleChartCommonBehavior = {
         };
     },
 
+    /**
+     * _calculateTextSize() method returns the size of an SVG text element and
+     * its position relative to the viewport.
+     *
+     * Returns a rect object with the following properties:
+     *
+     *    bottom - float - Y-coordinate, relative to the viewport origin, of the bottom of the rectangle box. Read only.
+     *    height - float - Height of the rectangle box (This is identical to bottom minus top). Read only.
+     *    left - float - X-coordinate, relative to the viewport origin, of the left of the rectangle box. Read only.
+     *    right - float - X-coordinate, relative to the viewport origin, of the right of the rectangle box. Read only.
+     *    top - float - Y-coordinate, relative to the viewport origin, of the top of the rectangle box. Read only.
+     *    width - float - Width of the rectangle box (This is identical to right minus left). Read only.
+     *
+     * @param {String} text
+     * @param {String} className
+     * @return {Object} rect
+    */
     _calculateTextSize: function(text, className) {
         var textNode = this.svg
             .append("text")
@@ -164,9 +193,24 @@ var pxSimpleChartCommonBehavior = {
         return size;
     },
 
+    /**
+     * _calculateTextHeight() returns height of SVG text element
+     *
+     * @param {String} text
+     * @param {String} className
+     * @return {Number} value
+    */
     _calculateTextHeight: function(text, className) {
         return Math.round(this._calculateTextSize(text, className).height);
     },
+
+    /**
+     * _calculateTextWidth() returns width of SVG text element
+     *
+     * @param {String} text
+     * @param {String} className
+     * @return {Number} value
+    */
     _calculateTextWidth: function(text, className) {
         return Math.round(this._calculateTextSize(text, className).width);
     },
@@ -216,6 +260,12 @@ var pxSimpleChartCommonBehavior = {
         return value = value >= min ? value : min;
     },
 
+    /**
+     * _reconcileWidth() reconciles the value assigned to width
+     *
+     * @param {Number} value
+     * @return {Number} width
+    */
     _reconcileWidth: function(value) {
         var width = this._reconcileDimensionValue(value, this.defaultWidth, 'width');
         if(width < this.minimumWidth) {
@@ -234,6 +284,12 @@ var pxSimpleChartCommonBehavior = {
         return width;
     },
 
+    /**
+     * _reconcileHeight() reconciles the value assigned to height
+     *
+     * @param {Number} value
+     * @return {Number} width
+    */
     _reconcileHeight: function(value) {
         var height = this._reconcileDimensionValue(value, this.defaultHeight, 'height');
         if(height < this.minimumHeight) {
@@ -252,11 +308,26 @@ var pxSimpleChartCommonBehavior = {
         return height;
     },
 
+    /**
+     * _reconcileDimensionValue() reconciles the value assigned to height or width
+     *
+     * @param {Number} value
+     * @param {Number} defaultValue
+     * @param {Number} type
+     * @return {Number} value
+    */
     _reconcileDimensionValue: function(value, defaultValue, type) {
         var value = this._reconcileValue(value, defaultValue);
         return value === 'auto' ? this._getAutoValue(type) : parseInt(value);
     },
 
+    /**
+     * _getAutoValue() returns the 'automatic' value for height or width based on
+     * parent node dimensions
+     *
+     * @param {Number} type
+     * @return {Number} value
+    */
     _getAutoValue: function(type) {
         var parent = this.parentNode;
         var padding = this._getElementPadding(parent);
@@ -267,6 +338,12 @@ var pxSimpleChartCommonBehavior = {
         }
     },
 
+    /**
+     * _getElementPadding() returns the padding of an element's computed style
+     *
+     * @param {HTML Object} element
+     * @return {Object} padding object
+    */
     _getElementPadding: function(el) {
         var style = window.getComputedStyle(el, null);
         return {
@@ -277,6 +354,11 @@ var pxSimpleChartCommonBehavior = {
         };
     },
 
+    /**
+     * _setDimensions() sets the dimensions of the component's `this.widthValue`
+     * and `this.heightValue`
+     *
+    */
     _setDimensions: function() {
         this.widthValue = this._reconcileWidth(this.width);
         this.heightValue = this._reconcileHeight(this.height);
