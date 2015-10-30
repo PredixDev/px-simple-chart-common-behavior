@@ -168,29 +168,40 @@ var pxSimpleChartCommonBehavior = {
      * _calculateTextSize() method returns the size of an SVG text element and
      * its position relative to the viewport.
      *
+     * The essential DOM function is getBoundingClientRect():
+     * https://developer.mozilla.org/en-US/docs/Web/API/Element/getBoundingClientRect
+     *
      * Returns a rect object with the following properties:
      *
-     *    bottom - float - Y-coordinate, relative to the viewport origin, of the bottom of the rectangle box. Read only.
      *    height - float - Height of the rectangle box (This is identical to bottom minus top). Read only.
-     *    left - float - X-coordinate, relative to the viewport origin, of the left of the rectangle box. Read only.
-     *    right - float - X-coordinate, relative to the viewport origin, of the right of the rectangle box. Read only.
-     *    top - float - Y-coordinate, relative to the viewport origin, of the top of the rectangle box. Read only.
      *    width - float - Width of the rectangle box (This is identical to right minus left). Read only.
+     *    top - float - Y-coordinate, relative to the viewport origin, of the top of the rectangle box. Read only.
+     *    left - float - X-coordinate, relative to the viewport origin, of the left of the rectangle box. Read only.
+     *    bottom - float - Y-coordinate, relative to the viewport origin, of the bottom of the rectangle box. Read only.
+     *    right - float - X-coordinate, relative to the viewport origin, of the right of the rectangle box. Read only.
      *
      * @param {String} text
      * @param {String} className
-     * @return {Object} rect
+     * @return {Promise} - resolves to return rectObject
     */
     _calculateTextSize: function(text, className) {
-        var textNode = this.svg
-            .append("text")
-            .attr("class", className)
-            .attr("x", 0)
-            .attr("y", 0)
-            .text(text);
-        var size = textNode.node().getBoundingClientRect();
-        textNode.remove();
-        return size;
+        // return a promise because correct bounding rect is unavailable until
+        // a few milliseconds have passed
+        var that = this;
+        return new Promise(function (resolve, reject) {
+            var textNode = that.svg
+                .append("text")
+                .attr("class", className)
+                .attr("x", 0)
+                .attr("y", 0)
+                .text(text);
+            var textSizeTimeout = setTimeout(function() {
+                var rectObject = textNode.node().getBoundingClientRect();
+                textNode.remove();
+                resolve(rectObject);
+                // reject(rectObject);
+            }, 1);
+        });
     },
 
     /**
@@ -198,10 +209,20 @@ var pxSimpleChartCommonBehavior = {
      *
      * @param {String} text
      * @param {String} className
-     * @return {Number} value
+     * @return {Promise} resolves to Number value - height in pixels
     */
     _calculateTextHeight: function(text, className) {
-        return Math.round(this._calculateTextSize(text, className).height);
+        // return a promise - the value is unavailabe immediately
+        var that = this;
+        return new Promise(function (resolve, reject) {
+            // _calculateTextSize - promise that resolves to return a rectObject
+            var textSizePromise = that._calculateTextSize(text, className);
+            textSizePromise.then(function(rectObject) {
+                resolve(Math.round(rectObject.height));
+            }).catch(function(reason) {
+                console.log('textSizePromise rejected: ' + reason);
+            });
+        });
     },
 
     /**
@@ -209,10 +230,20 @@ var pxSimpleChartCommonBehavior = {
      *
      * @param {String} text
      * @param {String} className
-     * @return {Number} value
+     * @return {Promise} resolves to Number value - height in pixels
     */
     _calculateTextWidth: function(text, className) {
-        return Math.round(this._calculateTextSize(text, className).width);
+        // return a promise - the value is unavailabe immediately
+        var that = this;
+        return new Promise(function (resolve, reject) {
+            // _calculateTextSize - promise that resolves to return a rectObject
+            var textSizePromise = that._calculateTextSize(text, className);
+            textSizePromise.then(function(rectObject) {
+                resolve(Math.round(rectObject.width));
+            }).catch(function(reason) {
+                console.log('textSizePromise rejected: ' + reason);
+            });
+        });
     },
 
     /**
