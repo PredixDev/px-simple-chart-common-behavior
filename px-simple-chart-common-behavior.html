@@ -120,6 +120,13 @@ var pxSimpleChartCommonBehavior = {
         };
     },
 
+    _addStyleScopeToElement: function(el) {
+        // pass in a d3 selection and this function will ensure that
+        // polymer style-scope is applied
+        el.classed(this.is, true);
+    },
+
+
     /**
      * _clearSVG() selects the SVG of the chart, shrinks it to 1px by 1px and
      * empties it of child elements. This is necessary to do before drawing or
@@ -195,12 +202,13 @@ var pxSimpleChartCommonBehavior = {
                 .attr("x", 0)
                 .attr("y", 0)
                 .text(text);
+            that._addStyleScopeToElement(textNode);
             var textSizeTimeout = setTimeout(function() {
-                var rectObject = textNode.node().getBoundingClientRect();
-                textNode.remove();
+                // can use getComputedTextLength, getBBox, getBoundingClientRect
+                var rectObject = textNode.node().getBBox();
                 resolve(rectObject);
-                // reject(rectObject);
-            }, 1);
+                textNode.remove();
+            }, 10);
         });
     },
 
@@ -220,7 +228,7 @@ var pxSimpleChartCommonBehavior = {
             textSizePromise.then(function(rectObject) {
                 resolve(Math.round(rectObject.height));
             }).catch(function(reason) {
-                console.log('textSizePromise rejected: ' + reason);
+                console.log('textSizePromise rejected: ', reason);
             });
         });
     },
@@ -241,7 +249,7 @@ var pxSimpleChartCommonBehavior = {
             textSizePromise.then(function(rectObject) {
                 resolve(Math.round(rectObject.width));
             }).catch(function(reason) {
-                console.log('textSizePromise rejected: ' + reason);
+                console.log('textSizePromise rejected: ', reason);
             });
         });
     },
