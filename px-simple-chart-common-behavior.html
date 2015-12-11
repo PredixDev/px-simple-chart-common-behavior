@@ -399,14 +399,15 @@ var pxSimpleChartCommonBehavior = {
      *
     */
     _setDimensions: function() {
+        // capture dimensions using pxChartDimensionsBehavior
         this.widthValue = this._reconcileWidth(this.width);
         this.heightValue = this._reconcileHeight(this.height);
-        // set a window.onresize event listener for responsive redraw of chart
+        // if auto-resize is necessary, set window.onresize listener
         if(this.height === 'auto' || this.width === 'auto') {
             var that = this;
-            window.onresize = function() {
+            window.addEventListener('resize', function() {
                 that._drawChart();
-            };
+            });
         };
     }
 
