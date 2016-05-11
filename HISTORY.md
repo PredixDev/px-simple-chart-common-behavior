@@ -1,5 +1,9 @@
 v1.3.1
 ==================
+* added oss_notice to bower ignore
+
+v1.3.1
+==================
 * updated Documentation in code.
 
 v1.3.0
