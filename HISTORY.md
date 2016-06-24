@@ -1,3 +1,7 @@
+v1.4.2
+==================
+* Remove unneeded dependency.
+
 v1.4.1
 ==================
 * Upgrade latest px
