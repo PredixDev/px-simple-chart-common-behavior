@@ -16,6 +16,7 @@
   ],
   "dependencies": {
     "polymer": "^1.5.0",
+    "iron-resizable-behavior": "~1.0.3",
     "px-theme": "https://github.com/PredixDev/px-theme.git#~0.8.0",
     "px": "https://github.com/PredixDev/px.git#1.4.2"
   },

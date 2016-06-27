@@ -1,3 +1,4 @@
+<link rel="import" href="../iron-resizable-behavior/iron-resizable-behavior.html">
 <script type="text/javascript" src="../px/dist/px.min.js"></script>
 <script>
 /*
@@ -29,7 +30,8 @@
 
 */
 
-window.pxSimpleChartCommonBehavior = {
+
+var _pxSimpleChartCommonBehavior = {
 
     /**
     * Private Properties
@@ -67,10 +69,27 @@ window.pxSimpleChartCommonBehavior = {
             type: String,
             observer: '_drawChart',
             value: this.defaultHeight
+        },
+        /**
+        * The time to debounce all re-draws
+        *
+        * @prop debounceTime
+        */
+        debounceTime: {
+          type: Number,
+          value: 50
         }
 
     },
 
+    /**
+     * Store the window width for re-draw.
+     * @private
+     */
+    _windowWidth: null,
+    created: function(){
+      this._windowWidth = window.innerWidth;
+    },
     /**
      * @method attached
      * Polymer fires this event automatically, we use it to define
@@ -78,8 +97,23 @@ window.pxSimpleChartCommonBehavior = {
      *
     */
     attached: function() {
-        this.svg = d3.select(this.$$("svg"));
-        this._drawChart();
+      this.svg = d3.select(this.$$("svg"));
+      this._drawChart();
+      this.listen(this, 'iron-resize', '_shouldDrawChart');
+    },
+    /**
+     * @method _shouldDrawChart
+     * Checks to see if the browsers width has changed before drawing chart.
+     * This fixes issue on mobile devices where chart re-draws happen continiously.
+     */
+
+    _shouldDrawChart: function(){
+      this.debounce('_shouldDrawChart', function(){
+        if(this._windowWidth !== window.innerWidth){
+          //console.warn(this._windowWidth, 'Window width did change, drawing chart.');
+          this._drawChart();
+        }
+      });
     },
 
     /**
@@ -87,12 +121,13 @@ window.pxSimpleChartCommonBehavior = {
      * removes previous chart, draws new chart. Debounced.
     */
     _drawChart: function() {
+      this._windowWidth = window.innerWidth;
         if(this.svg) {
             this._removeChart();
             // multiple calls to _drawChart need to be debounced
             this.debounce('_drawChartDebounced', function() {
                 this._drawChartDebounced();
-            }, 310);
+            }, this.debounceTime);
         }
     },
 
@@ -104,7 +139,7 @@ window.pxSimpleChartCommonBehavior = {
         this.debounce('_removeChartDebounced', function() {
             // first ensure that our SVG element is empty
             this._removeChartDebounced();
-        }, 300);
+        });
     },
 
     /**
@@ -436,10 +471,14 @@ window.pxSimpleChartCommonBehavior = {
         // if auto-resize is necessary, set window.onresize listener
         if(this.height === 'auto' || this.width === 'auto') {
             var that = this;
+            /*
             window.addEventListener('resize', function() {
+              console.log('Drawing chart');
                 that._drawChart();
             });
+            */
         }
     }
 };
+window.pxSimpleChartCommonBehavior = [Polymer.IronResizableBehavior, _pxSimpleChartCommonBehavior];
 </script>
