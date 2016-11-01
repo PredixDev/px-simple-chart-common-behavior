@@ -1,3 +1,7 @@
+v1.5.2
+==================
+* add polygit import for d3
+
 v1.4.2
 ==================
 * Remove unneeded dependency.
