@@ -1,3 +1,7 @@
+v1.5.4
+==================
+* added '@polymerBehavior pxSimpleChartCommonBehavior' to allow api viewer to find this behavior
+
 v1.5.3
 ==================
 * changed polygit import for d3
