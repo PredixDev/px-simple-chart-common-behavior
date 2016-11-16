@@ -1,3 +1,8 @@
+
+v1.5.5
+==================
+* changing Gruntfile.js to gulpfile.js
+
 v1.5.4
 ==================
 * added '@polymerBehavior pxSimpleChartCommonBehavior' to allow api viewer to find this behavior

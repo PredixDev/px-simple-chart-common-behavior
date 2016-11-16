@@ -1,23 +1,22 @@
 {
-  "name": "px-simple-chart-common-behavior",
-  "version": "1.5.4",
-  "main": [
-    "px-simple-chart-common-behavior.html"
-  ],
-  "ignore": [
-    ".*",
-    "npm-debug.log",
-    "Gruntfile.js",
-    "sass",
-    "bower_components",
-    "node_modules",
-    "test",
-    "OSS_Notice.pdf"
-  ],
-  "dependencies": {
-    "polymer": "^1.6.1",
-    "px": "~1.4.3"
-  },
-  "devDependencies": {
-  }
+    "name": "px-simple-chart-common-behavior",
+    "version": "1.5.5",
+    "main": [
+        "px-simple-chart-common-behavior.html"
+    ],
+    "ignore": [
+        ".*",
+        "npm-debug.log",
+        "gulpfile.js",
+        "sass",
+        "bower_components",
+        "node_modules",
+        "test",
+        "OSS_Notice.pdf"
+    ],
+    "dependencies": {
+        "polymer": "^1.6.1",
+        "px": "~1.4.3"
+    },
+    "devDependencies": {}
 }
