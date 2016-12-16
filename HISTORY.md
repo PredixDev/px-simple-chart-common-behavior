@@ -1,7 +1,10 @@
+v1.6.0
+==================
+* Add new colors behavior to help with theming
+
 v1.5.6
 ==================
 * changing all devDeps to ^
-
 
 v1.5.5
 ==================

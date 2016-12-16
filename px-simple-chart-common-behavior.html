@@ -1,37 +1,37 @@
 <script type="text/javascript" src="../px/dist/px.min.js"></script>
 <script>
+var PxSimpleChartCommonBehavior = PxSimpleChartCommonBehavior || {};
+
 /*
-    Name:
-    pxSimpleChartCommonBehavior
+  Name:
+  PxSimpleChartCommonBehavior.common
 
-    Description:
-    Polymer behavior that provides the basic operations for px-simple-bar-chart,
-    px-simple-line-chart, and px-simple-horizontal-bar-chart.
-    For example several functions are made available in order to define the
-    width and height of the SVG chart drawn using the D3.js graphics library.
-    The adds two attributes to an element: `width` and `height` attributes which
-    may be defined as: Number, Number as String, or "auto". Numbers will be
-    coerced into String and auto will set the element up to be responsive.
+  Description:
+  Polymer behavior that provides the basic operations for px-simple-bar-chart,
+  px-simple-line-chart, and px-simple-horizontal-bar-chart.
+  For example several functions are made available in order to define the
+  width and height of the SVG chart drawn using the D3.js graphics library.
+  The adds two attributes to an element: `width` and `height` attributes which
+  may be defined as: Number, Number as String, or "auto". Numbers will be
+  coerced into String and auto will set the element up to be responsive.
 
-    Dependencies:
-    - D3.js
-    - window.px library
+  Dependencies:
+  - D3.js
+  - window.px library
 
-    ## How to use
+  ## How to use
 
-    This behavior is not stand-alone. It must be used as a Polymer Behavior attached
-    to another component. In order to understand Polymer Behaviors you can read
-    about them on the
-    [Polymer Behaviors Documentation page](https://www.polymer-project.org/1.0/docs/devguide/behaviors.html)
-    or even watch a
-    [YouTube video by Rob Dodson](https://www.youtube.com/watch?v=YrlmieL3Z0k)
-    about them.
+  This behavior is not stand-alone. It must be used as a Polymer Behavior attached
+  to another component. In order to understand Polymer Behaviors you can read
+  about them on the
+  [Polymer Behaviors Documentation page](https://www.polymer-project.org/1.0/docs/devguide/behaviors.html)
+  or even watch a
+  [YouTube video by Rob Dodson](https://www.youtube.com/watch?v=YrlmieL3Z0k)
+  about them.
 
-    @polymerBehavior pxSimpleChartCommonBehavior
+  @polymerBehavior PxSimpleChartCommonBehavior.common
 */
-
-window.pxSimpleChartCommonBehavior = {
-
+PxSimpleChartCommonBehavior.common = {
     /**
     * Private Properties
     *
@@ -443,4 +443,7 @@ window.pxSimpleChartCommonBehavior = {
         }
     }
 };
+
+// Maintain backward compatability to call behavior with name `pxSimpleChartCommonBehavior`
+window.pxSimpleChartCommonBehavior = PxSimpleChartCommonBehavior.common;
 </script>
