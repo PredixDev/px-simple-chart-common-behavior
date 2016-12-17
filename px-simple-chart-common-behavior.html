@@ -187,7 +187,7 @@ PxSimpleChartCommonBehavior.common = {
                 return prev.length < current.length ? current : prev;
             });
         } catch(err) {
-            console.log('_getLongestSeries error:', err);
+            // console.log('_getLongestSeries error:', err);
             return 0;
         }
     },
@@ -251,7 +251,7 @@ PxSimpleChartCommonBehavior.common = {
             textSizePromise.then(function(rectObject) {
                 resolve(Math.round(rectObject.height));
             }).catch(function(reason) {
-                console.log('textSizePromise rejected: ', reason);
+                // console.log('textSizePromise rejected: ', reason);
             });
         });
     },
@@ -273,7 +273,7 @@ PxSimpleChartCommonBehavior.common = {
             textSizePromise.then(function(rectObject) {
                 resolve(Math.round(rectObject.width));
             }).catch(function(reason) {
-                console.log('textSizePromise rejected: ', reason);
+                // console.log('textSizePromise rejected: ', reason);
             });
         });
     },
@@ -336,16 +336,16 @@ PxSimpleChartCommonBehavior.common = {
         var width = this._reconcileDimensionValue(value, this.defaultWidth, 'width');
         if(width < this.minimumWidth) {
             width = this.defaultWidth;
-            console.error(
-                'The width of the chart with id of "'
-                + this.id
-                + '" is too low. The minimum is '
-                + this.minimumWidth
-                + ' pixels, however the chart is set to '
-                + width
-                + '. The default value of '
-                + this.defaultWidth
-                + ' has been assigned to the chart.');
+            // console.error(
+            //     'The width of the chart with id of "'
+            //     + this.id
+            //     + '" is too low. The minimum is '
+            //     + this.minimumWidth
+            //     + ' pixels, however the chart is set to '
+            //     + width
+            //     + '. The default value of '
+            //     + this.defaultWidth
+            //     + ' has been assigned to the chart.');
         }
         return width;
     },
@@ -361,16 +361,16 @@ PxSimpleChartCommonBehavior.common = {
         var height = this._reconcileDimensionValue(value, this.defaultHeight, 'height');
         if(height < this.minimumHeight) {
             height = this.defaultHeight;
-            console.error(
-                'The height of the chart with id of "'
-                + this.id
-                + '" is too low. The minimum is '
-                + this.minimumHeight
-                + ' pixels, however the chart is set to '
-                + height
-                + '. The default value of '
-                + this.defaultHeight
-                + ' has been assigned to the chart.');
+            // console.error(
+            //     'The height of the chart with id of "'
+            //     + this.id
+            //     + '" is too low. The minimum is '
+            //     + this.minimumHeight
+            //     + ' pixels, however the chart is set to '
+            //     + height
+            //     + '. The default value of '
+            //     + this.defaultHeight
+            //     + ' has been assigned to the chart.');
         }
         return height;
     },

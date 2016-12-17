@@ -1,3 +1,7 @@
+v1.6.1
+=================
+* Kill soft errors that are confusing and sometimes untrue
+
 v1.6.0
 ==================
 * Add new colors behavior to help with theming
