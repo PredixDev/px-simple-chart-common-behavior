@@ -5,6 +5,7 @@
     "px-simple-chart-common-behavior.html"
   ],
   "ignore": [
+    "*.enc",
     ".*",
     "npm-debug.log",
     "gulpfile.js",
