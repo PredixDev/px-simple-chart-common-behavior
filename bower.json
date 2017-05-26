@@ -1,6 +1,6 @@
 {
   "name": "px-simple-chart-common-behavior",
-  "version": "1.6.1",
+  "version": "2.0.0",
   "main": [
     "px-simple-chart-common-behavior.html"
   ],
@@ -18,7 +18,7 @@
   "dependencies": {
     "polymer": "^1.6.1",
     "px": "~1.4.3",
-    "px-colors-design": "^0.3.0"
+    "px-colors-design": "^1.0.0"
   },
   "devDependencies": {}
 }

@@ -1,3 +1,7 @@
+v2.0.0
+=================
+* Update dependencies for design refresh
+
 v1.6.1
 =================
 * Kill soft errors that are confusing and sometimes untrue
