@@ -1,6 +1,7 @@
 v2.0.0
 =================
 * Update dependencies for design refresh
+* Clean up code and documentation
 
 v1.6.1
 =================
