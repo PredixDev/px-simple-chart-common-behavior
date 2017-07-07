@@ -25,9 +25,9 @@ PxSimpleChartCommonBehavior.colors = [{
    * @return {String} - The found color in RGB format
    */
   _getDataVisColor: function(index) {
-    var length = this.seriesColorOrder.length,
+    var length = this.seriesColorList.length,
         i = this._calcIndex(index, length);
-    return this.dataVisColors[this.seriesColorOrder[i]];
+    return this.seriesColorList[i];
   },
 
   /**
