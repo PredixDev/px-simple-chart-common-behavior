@@ -16,7 +16,7 @@
     "OSS_Notice.pdf"
   ],
   "dependencies": {
-    "polymer": "^1.6.1",
+    "polymer": "^1.9.0",
     "px": "~1.4.3",
     "px-colors-design": "^1.0.0"
   },
