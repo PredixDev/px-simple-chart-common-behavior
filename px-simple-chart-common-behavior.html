@@ -304,6 +304,7 @@ PxSimpleChartCommonBehavior.common = {
      */
     _reconcileHeight: function(value) {
       var height = this._reconcileDimensionValue(value, this._defaultHeight, 'height');
+      //FIXME _defaultHeight is > _minimumHeight; why does that make sense??
       if(height < this._minimumHeight) {
         height = this._defaultHeight;
       }
