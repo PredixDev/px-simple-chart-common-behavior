@@ -1,10 +1,8 @@
-#Px-Simple-Chart-Common-Behavior
-
----
+# px-simple-chart-common-behavior
 
 ## Overview
 
-Polymer behavior that provides the basic operations for px-simple-bar-chart,
+Px-simple-chart-common-behavior is a Polymer behavior that provides the basic operations for px-simple-bar-chart,
 px-simple-line-chart, and px-simple-horizontal-bar-chart.
 For example several functions are made available in order to define the
 width and height of the SVG chart drawn using the D3.js graphics library.
