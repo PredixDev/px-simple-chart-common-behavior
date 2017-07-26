@@ -2,19 +2,21 @@
 
 ## Overview
 
-Px-simple-chart-common-behavior is a Polymer behavior that provides the basic operations for px-simple-bar-chart,
-px-simple-line-chart, and px-simple-horizontal-bar-chart.
+`Px-simple-chart-common-behavior` is a Polymer behavior that provides the basic operations for `px-simple-bar-chart`,
+`px-simple-line-chart`, and `px-simple-horizontal-bar-chart`.
 For example several functions are made available in order to define the
 width and height of the SVG chart drawn using the D3.js graphics library.
 The adds two attributes to an element: `width` and `height` attributes which
 may be defined as: Number, Number as String, or "auto". Numbers will be
 coerced into String and auto will set the element up to be responsive.
 
-Dependencies:
+## Dependencies
+The `px-simple-chart-common-behavior` module depends on two other libraries:
+
 - D3.js
 - window.px library
 
-## How to use
+## How to use it
 
 This behavior is not stand-alone. It must be used as a Polymer Behavior attached
 to another component. In order to understand Polymer Behaviors you can read
@@ -30,7 +32,7 @@ about them.
 bower install
 ```
 
-#### Step Two: Import the component at the head of your component's HTML file
+#### Step Two: Import the component in the head of your component's HTML file
 
 ```html
 <link rel="import" href="../px-simple-chart-common-behavior/px-simple-chart-common-behavior.html" />
@@ -53,14 +55,14 @@ Polymer({
 
 ##### Public Properties
 
-The Px-Simple-Chart-Common-Behavior defines the following public properties:
+The `px-simple-chart-common-behavior` defines the following public properties:
 
 `width` - sets the width of the component in pixels.
 `height` - sets the height of the component in pixels.
 
 ##### Private Properties
 
-The Px-Simple-Chart-Common-Behavior defines the following private properties:
+The `px-simple-chart-common-behavior` defines the following private properties:
 
 `defaultWidth` - sets the default width of the component in pixels.
 `defaultHeight` - sets the default height of the component in pixels.
