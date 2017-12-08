@@ -1,6 +1,6 @@
 {
   "name": "px-simple-chart-common-behavior",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "main": [
     "px-simple-chart-common-behavior.html"
   ],
@@ -16,12 +16,21 @@
     "OSS_Notice.pdf"
   ],
   "dependencies": {
-    "polymer": "^1.9.0",
-    "px": "~1.4.3",
-    "px-vis": "^3.0.0"
+    "polymer": "#1.9 - 2",
+    "px-vis": "^4.0.0"
   },
   "devDependencies": {},
   "resolutions": {
-    "webcomponentsjs": "^0.7.24"
+    "webcomponentsjs": "^1.0.0"
+  },
+  "variants": {
+    "1.x": {
+      "dependencies": {
+        "polymer": "^1.9.0"
+      },
+      "resolutions": {
+        "webcomponentsjs": "^0.7.0"
+      }
+    }
   }
 }
