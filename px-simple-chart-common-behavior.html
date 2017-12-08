@@ -269,9 +269,9 @@ PxSimpleChartCommonBehavior.common = {
           return 'auto';
           break;
         default:
-          if(px.isFloat(Number(value))) {
+          if(value === Number(value) && value % 1 !== 0) {
             return parseFloat(value);
-          } else if(px.isInt(Number(value))) {
+          } else if(value === Number(value) && value % 1 === 0) {
             return parseInt(value);
           } else {
             return value;
