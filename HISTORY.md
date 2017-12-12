@@ -1,3 +1,7 @@
+v2.1.2
+=================
+* remove stupid text empty string on svg clear
+
 v2.1.1
 =================
 * remove calls to deprecated px repo
