@@ -123,8 +123,8 @@ PxSimpleChartCommonBehavior.common = {
     _removeChartDebounced: function() {
       this.svg
         .attr("width", 1)
-        .attr("height", 1)
-        .text("");
+        .attr("height", 1);
+      this.svg[0][0].innerHTML = '';
     },
 
     /**
@@ -157,8 +157,9 @@ PxSimpleChartCommonBehavior.common = {
       // select the svg element
       this.svg
         .attr("width", 1)
-        .attr("height", 1)
-        .text("");
+        .attr("height", 1);
+
+      this.svg[0][0].innerHTML = '';
     },
 
     /**

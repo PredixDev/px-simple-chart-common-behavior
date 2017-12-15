@@ -1,3 +1,7 @@
+v2.1.2
+=================
+* Fix clearing so it doesnt append text node
+
 v2.1.1
 =================
 * remove calls to deprecated px repo
