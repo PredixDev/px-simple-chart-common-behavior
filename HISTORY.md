@@ -1,3 +1,7 @@
+v2.1.3
+=================
+* update vis version
+
 v2.1.2
 =================
 * Fix clearing so it doesnt append text node
