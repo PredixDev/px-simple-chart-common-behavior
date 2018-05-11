@@ -18,6 +18,7 @@
 'use strict';
 const gulp = require('gulp');
 const bump = require('gulp-bump');
+const { ensureLicense } = require('ensure-px-license');
 
 
 gulp.task('bump:patch', function(){
@@ -36,4 +37,10 @@ gulp.task('bump:major', function(){
   gulp.src(['./bower.json', './package.json'])
   .pipe(bump({type:'major'}))
   .pipe(gulp.dest('./'));
+});
+
+gulp.task('license', function() {
+  return gulp.src(['./**/*.{html,js,css,scss}', '!./node_modules/**/*', '!./bower_components?(-1.x)/**/*'])
+    .pipe(ensureLicense())
+    .pipe(gulp.dest('.'));
 });
