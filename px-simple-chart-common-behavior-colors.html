@@ -14,9 +14,10 @@ See the License for the specific language governing permissions and
 limitations under the License.
 -->
 
-<link rel="import" href="../px-vis/px-vis-behavior-colors.html" />
+<script type="module" src="../px-vis/px-vis-behavior-colors.js"></script>
 
-<script>
+<script type="module">
+import 'px-vis/px-vis-behavior-colors.js';
 var PxSimpleChartCommonBehavior = PxSimpleChartCommonBehavior || {};
 
 /*
@@ -60,5 +61,4 @@ PxSimpleChartCommonBehavior.colors = [{
     return i < l ? i : this._calcIndex(i - l, l);
   }
 }, PxColorsBehavior.dataVisColorTheming];
-
 </script>
